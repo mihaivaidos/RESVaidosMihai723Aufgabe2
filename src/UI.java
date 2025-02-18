@@ -46,6 +46,7 @@ public class UI {
                         break;
                     case 4:
                         // subpunctu d)
+                        filterCharacterByProdDorf();
                         break;
                     case 5:
                         // subpunctu e)
@@ -87,34 +88,34 @@ public class UI {
                     double price = Double.parseDouble(scanner.nextLine());
                     System.out.println("Enter the region: ");
                     String region = scanner.nextLine();
-                    controller.addObjWithName(name, price, region);
+                    controller.addProduct(name, price, region);
                     System.out.println("Added!");
                     break;
                 case 2:
-                    controller.getAllObjWithName().forEach(System.out::println);
+                    controller.getAllProducts().forEach(System.out::println);
                     System.out.println("Enter the name of the object you want to update: ");
                     String updateName = scanner.nextLine();
                     System.out.println("Enter the price: ");
                     double updatePrice = Double.parseDouble(scanner.nextLine());
                     System.out.println("Enter the region: ");
                     String updateRegion = scanner.nextLine();
-                    controller.updateObjWithName(updateName, updatePrice, updateRegion);
+                    controller.updateProduct(updateName, updatePrice, updateRegion);
                     System.out.println("Object with name " + updateName + " updated!");
                     break;
                 case 3:
-                    controller.getAllObjWithName().forEach(System.out::println);
+                    controller.getAllProducts().forEach(System.out::println);
                     System.out.println("Enter the name you want to delete: ");
                     String nameDel = scanner.nextLine();
-                    controller.deleteObjWithName(nameDel);
+                    controller.deleteProduct(nameDel);
                     System.out.println("Object with name " + nameDel + " deleted!");
                     break;
                 case 4:
-                    controller.getAllObjWithName().forEach(System.out::println);
+                    controller.getAllProducts().forEach(System.out::println);
                     break;
                 case 5:
                     System.out.println("Enter the name: ");
                     String nameGet = scanner.nextLine();
-                    System.out.println(controller.getObjWithName(nameGet));
+                    System.out.println(controller.getProduct(nameGet));
                     break;
                 case 0:
                     return;
@@ -129,11 +130,11 @@ public class UI {
      */
     private void manageIDObj() {
         while (true) {
-            System.out.println("1. Add");
-            System.out.println("2. Update");
-            System.out.println("3. Delete");
-            System.out.println("4. Get All");
-            System.out.println("5. Get by ID");
+            System.out.println("1. Add character");
+            System.out.println("2. Update character");
+            System.out.println("3. Delete character");
+            System.out.println("4. Get All character");
+            System.out.println("5. Get by ID character");
             System.out.println("0. Back");
 
             int option = scanner.nextInt();
@@ -145,21 +146,24 @@ public class UI {
                     String name = scanner.nextLine();
                     System.out.println("Enter the herkunftsdorf of the character: ");
                     String herkunftsdorf = scanner.nextLine();
-                     List<Produkt> produktList = new ArrayList<>();
-                     while (true){
-                                System.out.println("Enter character product: ");
-                                String prod = scanner.nextLine();
-                                if(prod.isEmpty()){
-                                    break;
-                                }
-                                else {
-                                    produktList.add(controller.getObjWithName(prod));
-                                }
-                            }
-                     controller.addObjWithID(name,herkunftsdorf,produktList);
+                    List<Produkt> produktList = new ArrayList<>();
+                    controller.getAllProducts().forEach(System.out::println);
+                    while (true){
+                        System.out.println("Enter character product: ");
+                        String prod = scanner.nextLine();
+                        if(prod.isEmpty()){
+                            break;
+                        }
+                        else {
+                            produktList.add(controller.getProduct(prod));
+                        }
+                    }
+                    System.out.println("Da");
+                    controller.addCharacter(name,herkunftsdorf,produktList);
+                    System.out.println("Added");
                     break;
                 case 2:
-                    controller.getAllObjWithID().forEach(System.out::println);
+                    controller.getAllCharacters().forEach(System.out::println);
                     System.out.println("Enter the id of the object you want to update: ");
                     int updateID = Integer.parseInt(scanner.nextLine());
                     System.out.println("Enter the name of the product: ");
@@ -174,26 +178,26 @@ public class UI {
                             break;
                         }
                         else {
-                            prodList.add(controller.getObjWithName(prod));
+                            prodList.add(controller.getProduct(prod));
                         }
                     }
-                    controller.updateObjWithID(updateID, nameUpt, herkunftsortUpt, prodList);
+                    controller.updateCharacter(updateID, nameUpt, herkunftsortUpt, prodList);
                     System.out.println("Object with id: " + updateID + " updated!");
                     break;
                 case 3:
-                    controller.getAllObjWithID().forEach(System.out::println);
+                    controller.getAllCharacters().forEach(System.out::println);
                     System.out.println("Enter the id you want to delete: ");
                     int idDel = Integer.parseInt(scanner.nextLine());
-                    controller.deleteObjWithID(idDel);
+                    controller.deleteCharacter(idDel);
                     System.out.println("Object with id: " + idDel + " deleted!");
                     break;
                 case 4:
-                    controller.getAllObjWithID().forEach(System.out::println);
+                    controller.getAllCharacters().forEach(System.out::println);
                     break;
                 case 5:
                     System.out.println("Enter the id: ");
                     int idGet = Integer.parseInt(scanner.nextLine());
-                    System.out.println(controller.getObjWithID(idGet));
+                    System.out.println(controller.getCharacter(idGet));
                     break;
                 case 0:
                     return;
@@ -210,16 +214,21 @@ public class UI {
     }
 
     private void sortCharacterProdByPrice() {
-        controller.getAllObjWithID().forEach(System.out::println);
+        controller.getAllCharacters().forEach(System.out::println);
         System.out.println("Enter a character ID: ");
         int id = Integer.parseInt(scanner.nextLine());
         System.out.println("Enter the sorting mode (asc/desc): ");
         String type = scanner.nextLine();
         switch (type){
-            case "asc" -> controller.sortCharacterProdByPrice(id,"asc").forEach(System.out::println);
-            case "desc" -> controller.sortCharacterProdByPrice(id,"desc").forEach(System.out::println);
+            case "asc" -> controller.sortCharacterProdByPrice(id,"asc").stream().map(p -> p.getName() + " - " + p.getPrice()).forEach(System.out::println);
+            case "desc" -> controller.sortCharacterProdByPrice(id,"desc").stream().map(p -> p.getName() + " - " + p.getPrice()).forEach(System.out::println);
         }
+    }
 
+    private void filterCharacterByProdDorf() {
+        System.out.println("Enter a region: ");
+        String region = scanner.nextLine();
+        controller.filterCharacterByProdRegion(region).stream().map(Character::getName).forEach(System.out::println);
     }
 
 }
