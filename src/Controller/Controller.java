@@ -1,4 +1,4 @@
-// Controller
+package Controller;// Controller.Controller
 import Model.Character;
 import Model.Produkt;
 import Repo.ObjectWithIDRepo;
@@ -14,7 +14,7 @@ public class Controller {
     private int newObjID = 5;
 
     /**
-     * Constructs a new Controller with the given repositories.
+     * Constructs a new Controller.Controller with the given repositories.
      *
      * @param characterRepo the repository for
      * @param productRepo the repository for
