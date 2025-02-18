@@ -26,7 +26,7 @@ public class Controller {
     /**
      * Adds an object to the .... repo.
      */
-    public void addObjWithName(String name, int price, String region) {
+    public void addObjWithName(String name, double price, String region) {
         objectWithNameRepo.add(new Produkt(name, price, region));
     }
 
@@ -40,7 +40,7 @@ public class Controller {
     /**
      * Updates an object in the .... repo.
      */
-    public void updateObjWithName(String name, int price, String region) {
+    public void updateObjWithName(String name, double price, String region) {
         objectWithNameRepo.update(new Produkt(name, price, region));
     }
 
