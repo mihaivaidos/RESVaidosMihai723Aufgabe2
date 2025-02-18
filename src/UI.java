@@ -1,4 +1,8 @@
 // UI
+import Model.Produkt;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UI {
@@ -16,8 +20,8 @@ public class UI {
      */
     public void run() {
         while (true) {
-            System.out.println("1. Spieler Operations");
-            System.out.println("2. Verein Operations");
+            System.out.println("1. Product Operations");
+            System.out.println("2. Character Operations");
             System.out.println("3. First filter");
             System.out.println("4. Second filter");
             System.out.println("5. Third filter");
@@ -58,7 +62,7 @@ public class UI {
     }
 
     /**
-     * Method that handles the CRUD operation for the ....
+     * Method that handles the CRUD operation for the products
      */
     private void manageNameObj() {
         while (true) {
@@ -118,7 +122,7 @@ public class UI {
     }
 
     /**
-     * Method that handles the CRUD operation for the ...
+     * Method that handles the CRUD operation for the character
      */
     private void manageIDObj() {
         while (true) {
@@ -133,53 +137,57 @@ public class UI {
             scanner.nextLine();
 
             switch (option) {
-                case 1: //addTeam();
-                    // daca are lista de obiectu celalalt
-                    // List<Medikament> medikamenteList = new ArrayList<>();
-                    // while (true){
-                    //            System.out.println("Enter patient medikament: ");
-                    //            String medikament = scanner.nextLine();
-                    //            if(medikament.isEmpty()){
-                    //                break;
-                    //            }
-                    //            else {
-                    //                medikamenteList.add(krankenhausController.findMedikament(medikament));
-                    //            }
-                    //        }
-                    //        controller.addPatienten(id,name,alter,diagnose,medikamenteList);
+                case 1:
+                    System.out.println("Enter the name of the character: ");
+                    String name = scanner.nextLine();
+                    System.out.println("Enter the herkunftsdorf of the character: ");
+                    String herkunftsdorf = scanner.nextLine();
+                     List<Produkt> produktList = new ArrayList<>();
+                     while (true){
+                                System.out.println("Enter character product: ");
+                                String prod = scanner.nextLine();
+                                if(prod.isEmpty()){
+                                    break;
+                                }
+                                else {
+                                    produktList.add(controller.getObjWithName(prod));
+                                }
+                            }
+                     controller.addObjWithID(name,herkunftsdorf,produktList);
                     break;
-                case 2: //updateTeam();
+                case 2:
                     controller.getAllObjWithID().forEach(System.out::println);
                     System.out.println("Enter the id of the object you want to update: ");
                     int updateID = Integer.parseInt(scanner.nextLine());
-                    // Vereine vereine = controller.getAllObjWithID.stream().filter(o -> o.getID() == updateID).findFirst().orElse(null);
-                    // if(vereine != null) {
-                    // List<Medikament> medikamenteList = new ArrayList<>();
-                    // while (true){
-                    //            System.out.println("Enter patient medikament: ");
-                    //            String medikament = scanner.nextLine();
-                    //            if(medikament.isEmpty()){
-                    //                break;
-                    //            }
-                    //            else {
-                    //                medikamenteList.add(krankenhausController.findMedikament(medikament));
-                    //            }
-                    //        }
-                    //        controller.addPatienten(id,name,alter,diagnose,medikamenteList);
+                    System.out.println("Enter the name of the product: ");
+                    String nameUpt = scanner.nextLine();
+                    System.out.println("Enter the herkunftsort: ");
+                    String herkunftsortUpt = scanner.nextLine();
+                    List<Produkt> prodList = new ArrayList<>();
+                    while (true){
+                        System.out.println("Enter character product: ");
+                        String prod = scanner.nextLine();
+                        if(prod.isEmpty()){
+                            break;
+                        }
+                        else {
+                            prodList.add(controller.getObjWithName(prod));
+                        }
+                    }
+                    controller.updateObjWithID(updateID, nameUpt, herkunftsortUpt, prodList);
                     System.out.println("Object with id: " + updateID + " updated!");
-                    // }
                     break;
-                case 3: //deleteTeam();
+                case 3:
                     controller.getAllObjWithID().forEach(System.out::println);
                     System.out.println("Enter the id you want to delete: ");
                     int idDel = Integer.parseInt(scanner.nextLine());
                     controller.deleteObjWithID(idDel);
                     System.out.println("Object with id: " + idDel + " deleted!");
                     break;
-                case 4: // getAllTeam();
+                case 4:
                     controller.getAllObjWithID().forEach(System.out::println);
                     break;
-                case 5: // getTeamById();
+                case 5:
                     System.out.println("Enter the id: ");
                     int idGet = Integer.parseInt(scanner.nextLine());
                     System.out.println(controller.getObjWithID(idGet));

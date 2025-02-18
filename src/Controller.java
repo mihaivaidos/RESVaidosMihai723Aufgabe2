@@ -75,7 +75,7 @@ public class Controller {
      * @param name the name of the ....
      * @return the object
      */
-    public Object getObjWithName(String name) {
+    public Produkt getObjWithName(String name) {
         return objectWithNameRepo.get(name);
     }
 
@@ -85,7 +85,7 @@ public class Controller {
      * @param id the id of the ...
      * @return the object
      */
-    public Object getObjWithID(int id) {
+    public Character getObjWithID(int id) {
         return objectWithIDRepo.get(id);
     }
 
