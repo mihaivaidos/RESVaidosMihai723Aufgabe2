@@ -118,4 +118,8 @@ public class Controller {
 //        return data;
 //    }
 
+    public List<Character> filterCharacterByHerkunftsort(String herkunftsort) {
+        return objectWithIDRepo.getAll().stream().filter(c -> c.getHerkunftsdorf().equals(herkunftsort)).toList();
+    }
+
 }

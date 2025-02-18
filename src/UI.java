@@ -1,4 +1,5 @@
 // UI
+import Model.Character;
 import Model.Produkt;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class UI {
                         break;
                     case 3:
                         // subpunctu c)
+                        filterCharacterByHerkunftsort();
                         break;
                     case 4:
                         // subpunctu d)
@@ -198,6 +200,12 @@ public class UI {
                     break;
             }
         }
+    }
+
+    private void filterCharacterByHerkunftsort() {
+        System.out.println("Enter a herkunftsort: ");
+        String herkunftsort = scanner.nextLine();
+        controller.filterCharacterByHerkunftsort(herkunftsort).stream().map(Character::getName).forEach(System.out::println);
     }
 
 }
