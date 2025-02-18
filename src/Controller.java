@@ -122,4 +122,9 @@ public class Controller {
         return objectWithIDRepo.getAll().stream().filter(c -> c.getHerkunftsdorf().equals(herkunftsort)).toList();
     }
 
+    public List<Produkt> sortCharacterProdByPrice(int charID, String sortMode) {
+        Character c = objectWithIDRepo.get(charID);
+        return c.getProdukts().stream().sorted((p1, p2) -> sortMode.equals("asc") ? Double.compare(p1.getPrice(), p2.getPrice()) : Double.compare(p2.getPrice(), p1.getPrice())).toList();
+    }
+
 }

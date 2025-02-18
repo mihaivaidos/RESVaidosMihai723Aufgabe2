@@ -49,6 +49,7 @@ public class UI {
                         break;
                     case 5:
                         // subpunctu e)
+                        sortCharacterProdByPrice();
                         break;
                     case 0:
                         System.out.println("Exiting...");
@@ -206,6 +207,19 @@ public class UI {
         System.out.println("Enter a herkunftsort: ");
         String herkunftsort = scanner.nextLine();
         controller.filterCharacterByHerkunftsort(herkunftsort).stream().map(Character::getName).forEach(System.out::println);
+    }
+
+    private void sortCharacterProdByPrice() {
+        controller.getAllObjWithID().forEach(System.out::println);
+        System.out.println("Enter a character ID: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter the sorting mode (asc/desc): ");
+        String type = scanner.nextLine();
+        switch (type){
+            case "asc" -> controller.sortCharacterProdByPrice(id,"asc").forEach(System.out::println);
+            case "desc" -> controller.sortCharacterProdByPrice(id,"desc").forEach(System.out::println);
+        }
+
     }
 
 }
